@@ -1,25 +1,32 @@
 import React from 'react';
 import './App.css';
+import {useState} from 'react';
 
-const Square = ({value}) => <button className='square'>{value}</button>
+const Square = ({value, clickedSquare}) => <button className='square' onClick={clickedSquare}>{value}</button>
 
-function Board() {
+const Board = () => {
+  const [squares, setSquares] = useState(Array(9).fill(null));
+  const handleClick = () => {
+    const nextSquares = squares.sclice(); //error
+    nextSquares[0] = 'X';
+    setSquares(nextSquares);
+  }
   return (
     <>
       <div className='board-row' id='board-top'>
-        <Square value={1} />
-        <Square value={2} />
-        <Square value={3} />
+        <Square value={squares[0]} clickedSquare={handleClick}/>
+        <Square value={squares[1]} />
+        <Square value={squares[2]} />
       </div>
       <div className='board-row' id='board-mid'>
-        <Square value={4} />
-        <Square value={5} />
-        <Square value={6} />
+        <Square value={squares[3]} />
+        <Square value={squares[4]} />
+        <Square value={squares[5]} />
       </div>
       <div className='board-row' id='board-bot'>
-        <Square value={7} />
-        <Square value={8} />
-        <Square value={9} />
+        <Square value={squares[6]} />
+        <Square value={squares[7]} />
+        <Square value={squares[8]} />
       </div>
     </>
   );
